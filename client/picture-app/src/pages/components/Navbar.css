@@ -1,0 +1,133 @@
+/* ========== NAVBAR STYLES ========== */
+:root {
+    --color-primary: #ffffff;
+    --color-secondary: #022b3a;
+    --color-accent: #1f7a8c;
+    --color-border: #bfdbf7;
+    --color-bg: #e1e5f2;
+    --color-hover: #f2a365;
+    /* Accent hover color */
+}
+
+.navbar {
+    width: 100%;
+    background-color: var(--color-secondary);
+    padding: 12px 30px;
+    /* Adjusted padding to make navbar more compact */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(31, 122, 140, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 1200px;
+    /* Limit navbar width */
+    margin: 0 auto;
+    /* Center align the navbar */
+    height: 20vh;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    /* Limit width */
+    margin: 0 auto;
+    /* Center content */
+}
+
+.logo {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    /* Reduced font size for a more compact navbar */
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--color-hover);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 1.2rem;
+    /* Slightly smaller font size for links */
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-hover);
+    transform: scale(1.05);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 4px;
+}
+
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-secondary);
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.2);
+}
+
+.nav-links li {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* Adjust the height of navbar to be compact */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 10px 20px;
+        /* Reduced padding for small screens */
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        /* Slightly smaller font size for logo on small screens */
+    }
+
+    .nav-links {
+        gap: 20px;
+        /* Reduce the gap between links on smaller screens */
+    }
+}
