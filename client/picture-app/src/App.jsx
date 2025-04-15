@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import ContentPage from './pages/ContentPage';
 import EditImage from './pages/EditImage';
 import CropImage from './pages/CropImage';
+import ChatBox from './pages/components/ChatBox';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/content" element={<ContentPage />} />
           <Route path="/edit-image" element={<EditImage />} /> 
           <Route path="/crop-image" element={<CropImage />} />
+          <Route path="/ChatBox" element={<ChatBox />} />
         </Routes>
       </div>
     </Router>

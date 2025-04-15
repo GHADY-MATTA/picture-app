@@ -77,7 +77,9 @@ function EditImage() {
   // Handle Delete
   const handleDelete = async () => {
     const imageName = imageSrc.split('/').pop(); // Extract image name from the src URL
-    const result = await ipcRenderer.invoke('delete-image', { name: imageName });
+    // const result = await ipcRenderer.invoke('delete-image', { name: imageName });
+    const result = await window.electronAPI.deleteImage({ name: imageName });
+
     
     if (result.success) {
       alert(result.message); // Notify the user of successful deletion

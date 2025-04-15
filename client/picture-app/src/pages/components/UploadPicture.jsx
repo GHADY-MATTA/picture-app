@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 
-// 🔐 Electron fallback-safe require
-const electron = window.require ? window.require('electron') : null;
-const ipcRenderer = electron?.ipcRenderer;
-
 function UploadPicture({ onUploadSuccess }) {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
@@ -13,12 +9,15 @@ function UploadPicture({ onUploadSuccess }) {
   };
 
   const handleUpload = async () => {
-    if (!file || !ipcRenderer) return;
+    if (!file || !window.electronAPI?.saveImage) {
+      setMessage('❌ Electron API not available');
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = function () {
       const buffer = reader.result;
-      ipcRenderer.invoke('save-image', {
+      window.electronAPI.saveImage({
         name: file.name,
         data: buffer
       }).then((res) => {

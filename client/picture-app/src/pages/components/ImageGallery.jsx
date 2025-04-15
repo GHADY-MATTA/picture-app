@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link to handle navigation
-import './ImageGallery.css'; // Make sure to import the correct CSS file
-
-const electron = window.require ? window.require('electron') : null;
-const ipcRenderer = electron?.ipcRenderer;
+import { Link } from 'react-router-dom';
+import './ImageGallery.css';
 
 function ImageGallery({ refreshKey }) {
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!ipcRenderer) {
-      setError("Electron's ipcRenderer is not available.");
-      console.error("ipcRenderer is not available.");
+    if (!window.electronAPI?.getImages) {
+      setError("❌ Electron API (getImages) is not available.");
+      console.error("window.electronAPI.getImages is missing.");
       return;
     }
 
-    ipcRenderer.invoke('get-images')
+    window.electronAPI.getImages()
       .then((imgs) => {
         console.log("📂 Received images from Electron:", imgs);
         setImages(imgs);
@@ -25,13 +22,13 @@ function ImageGallery({ refreshKey }) {
         setError(`Failed to load images: ${err.message}`);
         console.error("Error fetching images:", err);
       });
-  }, [refreshKey]);  // Re-fetch when refreshKey changes
+  }, [refreshKey]);
 
   return (
     <div className="gallery-container">
       <h3>Your Images</h3>
 
-      {error && <p className="error-message">{error}</p>} {/* Error message if any */}
+      {error && <p className="error-message">{error}</p>}
 
       <div className="image-grid">
         {images.length === 0 ? (
@@ -39,24 +36,19 @@ function ImageGallery({ refreshKey }) {
         ) : (
           images.map((img, idx) => (
             <div key={idx} className="image-card">
-              {/* Image */}
               <img
                 src={img.path}
                 alt={img.name}
                 className="image"
                 onError={(e) => {
                   console.error(`❌ Failed to load: ${img.path}`);
-                  e.target.src = 'https://via.placeholder.com/150?text=Image+Error'; // Fallback image
+                  e.target.src = 'https://via.placeholder.com/150?text=Image+Error';
                 }}
                 onLoad={() => {
                   console.log(`✅ Successfully loaded: ${img.path}`);
                 }}
               />
-
-              {/* Image Name */}
               <div className="image-name">{img.name}</div>
-
-              {/* Hover effect with Edit Button */}
               <div className="hover-overlay">
                 <Link to={`/edit-image?img=${encodeURIComponent(img.path)}`} className="edit-link">
                   <span>Edit</span>

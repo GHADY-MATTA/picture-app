@@ -2,9 +2,13 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { fileURLToPath } from 'url';
 
 console.log("💥 electron.js started");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const preloadPath = path.resolve(__dirname, 'preload.js'); // ✅ note .js now
 
+console.log("📦 Using preload from:", preloadPath);
 function createWindow() {
   console.log("🪟 Creating a window...");
 
@@ -13,8 +17,9 @@ function createWindow() {
     height: 800,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
       webSecurity: false, // try this temporarily
+      preload: preloadPath,
     },
   });
 
