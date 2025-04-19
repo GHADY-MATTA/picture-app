@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-// 🔐 Electron fallback-safe require
+//  Electron fallback-safe require
 const electron = window.require ? window.require('electron') : null;
 const ipcRenderer = electron?.ipcRenderer;
 

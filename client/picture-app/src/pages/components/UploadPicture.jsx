@@ -10,7 +10,7 @@ function UploadPicture({ onUploadSuccess }) {
 
   const handleUpload = async () => {
     if (!file || !window.electronAPI?.saveImage) {
-      setMessage('❌ Electron API not available');
+      setMessage(' Electron API not available');
       return;
     }
 
@@ -25,7 +25,7 @@ function UploadPicture({ onUploadSuccess }) {
         setFile(null);
 
         if (onUploadSuccess) {
-          onUploadSuccess(); // ✅ Trigger gallery refresh
+          onUploadSuccess(); //  Trigger gallery refresh
         }
       });
     };

@@ -8,7 +8,7 @@ function ImageGallery({ refreshKey }) {
 
   useEffect(() => {
     if (!window.electronAPI?.getImages) {
-      setError("❌ Electron API (getImages) is not available.");
+      setError(" Electron API (getImages) is not available.");
       console.error("window.electronAPI.getImages is missing.");
       return;
     }
@@ -41,11 +41,11 @@ function ImageGallery({ refreshKey }) {
                 alt={img.name}
                 className="image"
                 onError={(e) => {
-                  console.error(`❌ Failed to load: ${img.path}`);
+                  console.error(` Failed to load: ${img.path}`);
                   e.target.src = 'https://via.placeholder.com/150?text=Image+Error';
                 }}
                 onLoad={() => {
-                  console.log(`✅ Successfully loaded: ${img.path}`);
+                  console.log(`Successfully loaded: ${img.path}`);
                 }}
               />
               <div className="image-name">{img.name}</div>

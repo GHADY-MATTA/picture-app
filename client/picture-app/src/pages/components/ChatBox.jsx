@@ -14,7 +14,7 @@ function ChatBox() {
     console.log('🛰️ Connecting to WebSocket server...');
 
     socket.onopen = () => {
-      console.log('✅ WebSocket connected');
+      console.log(' WebSocket connected');
     };
 
     socket.onmessage = (event) => {
@@ -33,7 +33,7 @@ function ChatBox() {
     };
 
     return () => {
-      console.log('🧹 Cleaning up socket');
+      console.log(' Cleaning up socket');
       socket.close();
     };
   }, []);
@@ -49,7 +49,7 @@ function ChatBox() {
       setMessages(prev => [...prev, `🧍 You: ${trimmed}`]);
       setInput('');
     } else {
-      console.warn('⚠️ Cannot send — socket not open');
+      console.warn('Cannot send — socket not open');
     }
   };
 
