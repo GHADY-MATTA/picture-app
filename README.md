@@ -79,3 +79,146 @@
 | Get Chapters                        | Generate Summary                  | Code Generator Prompt              |
 | ------------------------------------ | ---------------------------------- | ---------------------------------- |
 | ![API 1](./readme/demo/postman1.png) | ![API 2](./readme/demo/postman2.png) | ![API 3](./readme/demo/postman3.png) |
+
+
+
+
+# 📷 Electron x React x Laravel | Picture Manager Desktop App
+
+A powerful cross-platform **desktop application** built with **Electron.js**, **React**, and **Laravel**, allowing users to locally manage, modify, and enhance pictures while supporting real-time chat and secure login analytics. This project combines native-like performance with modern web technologies and secure backend logic.
+
+> ✅ Full project architecture, CI/CD pipeline, and all features built and led by **Ghady Matta**.
+
+---
+
+## 🌟 Features
+
+| Feature                | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| 📎 Local Image Upload  | Store and manage images on user's machine                 |
+| 🌈 Image Editing Tools | Crop, watermark, rotate, and convert to B/W with clean UI |
+| ❌ Delete Pictures      | Safely remove pictures from local directory               |
+| 🔐 Login + IP Logging  | Log user IP & geolocation using Laravel + Middleware      |
+| 💬 Global Chat         | Forum-style chat via WebSocket server (Node.js)           |
+| ♻️ CI/CD + Testing     | Laravel tests + GitHub Actions for quality deployment     |
+
+---
+
+## 🛠️ Tech Stack
+
+* **Desktop Core**: Electron.js
+* **Frontend**: React, Tailwind CSS, FileReader API, Canvas API
+* **Backend**: Laravel 12, Sanctum Auth, GeoIP
+* **Chat Server**: Node.js + WebSocket (Socket.IO)
+* **CI/CD**: GitHub Actions with PHPUnit
+
+---
+
+## 💼 App Functional Flow
+
+```mermaid
+graph TD
+    A[Electron Desktop UI] --> B[React Renderer]
+    B --> C[Local File System (Image Storage)]
+    B --> D[Image Edit Tools]
+    A --> E[Login Page]
+    E --> F[Laravel API Auth]
+    F --> G[Log IP + Geolocation]
+    B --> H[Chat Panel (Forum Chat)]
+    H --> I[WebSocket Server (Node.js)]
+```
+
+---
+
+## 🔄 Core Modules
+
+### 📸 Picture Editor
+
+* Crop (resizable box)
+* Add text/image watermark (Canvas)
+* Rotate left/right (90°)
+* B/W filter (grayscale)
+
+### 🔐 Login System
+
+* Laravel Auth via Axios
+* Store login time, IP (request()->ip()), and geolocation (GeoIP2)
+
+### 💬 Chat (Socket.IO)
+
+* Connects to public Node.js server
+* All logged-in users can read/send messages
+
+---
+
+## 🛪‍♂️ Dev Environment Setup
+
+### Backend (Laravel)
+
+```bash
+cd server
+composer install
+cp .env.example .env
+php artisan migrate
+php artisan serve
+```
+
+### CI/CD Configuration (GitHub Actions)
+
+```yaml
+# .github/workflows/ci.yml
+name: Laravel CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+    - run: composer install
+    - run: php artisan test
+```
+
+### Frontend (Electron + React)
+
+```bash
+cd client
+npm install
+npm run electron-dev
+```
+
+### WebSocket Server
+
+```bash
+cd websocket-server
+npm install
+node index.js
+```
+
+---
+
+## 🔄 Folder Structure
+
+```
+electron-picture-manager/
+├── client/               # Electron + React frontend
+│   └── src/components/
+├── server/               # Laravel API backend
+│   └── app/Http/
+├── websocket-server/     # Node.js WebSocket server
+│   └── index.js
+├── .github/workflows/    # CI/CD pipeline
+```
+
+---
+
+## 👤 Author
+
+Developed end-to-end by **Ghady Matta**
+Merging offline-native image management with real-time collaboration 🚀
+
+GitHub: [@ghady-matta](https://github.com/ghady-matta)
+
